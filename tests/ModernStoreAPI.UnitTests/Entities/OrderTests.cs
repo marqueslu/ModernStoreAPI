@@ -16,13 +16,15 @@ namespace ModernStoreAPI.UnitTests.Entities
         private readonly Order _order;
         private readonly Name _name;
         private readonly Email _email;
+        private readonly Document _document;
 
         public OrderTests()
         {
-            _user = new User("lucasmarques", "123435");
+            _user = new User("lucasmarques", "123435", "123435");
             _name = new Name("Lucas", "Marques");
+            _document = new Document("93149711045");
             _email = new Email("lucas.msilva09@gmail.com");
-            _customer = new Customer(_name, _email, _user);
+            _customer = new Customer(_name, _document, _email, _user);
             _mouse = new Product("Mouse", 300, "mouse.jpg", 0);
             _keyboard = new Product("Keyboard", 250, "keyboard.jpg", 20);
             _order = new Order(_customer, 8, 10);
