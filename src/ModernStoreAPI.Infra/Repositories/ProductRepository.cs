@@ -27,7 +27,7 @@ namespace ModernStoreAPI.Infra.Repositories
         public IEnumerable<GetProductListCommandResult> Get()
         {
             var query = "SELECT [ID], [TITLE], [IMAGE], [PRICE] FROM Product";
-            using (var con = new SqlConnection(@""))
+            using (var con = new SqlConnection(@"server=localhost,1433;Database=ModerStore;User ID=SA;Password=123Aa321"))
             {
                 con.Open();
                 return con.Query<GetProductListCommandResult>(query);

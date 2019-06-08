@@ -61,7 +61,7 @@ namespace ModernStoreAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;h1&gt;Welcome &lt;strong&gt;{1}&lt;/strong&gt;&lt;/h1&gt;.
+        ///   Looks up a localized string similar to &lt;h1&gt;Welcome &lt;strong&gt;{0}&lt;/strong&gt;&lt;/h1&gt;.
         /// </summary>
         public static string WelcomeEmailBody {
             get {
@@ -70,7 +70,7 @@ namespace ModernStoreAPI.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome, {1}.
+        ///   Looks up a localized string similar to Welcome, {0}.
         /// </summary>
         public static string WelcomeEmailTitle {
             get {

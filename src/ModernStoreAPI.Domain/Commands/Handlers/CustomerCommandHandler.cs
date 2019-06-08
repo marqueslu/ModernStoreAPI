@@ -10,7 +10,7 @@ using ModernStoreAPI.Shared.Commands;
 
 namespace ModernStoreAPI.Domain.Commands.Handlers
 {
-    public class CustomerCommandHandler : Notifiable,  ICommandHandler<RegisterCustomerCommand>
+    public class CustomerCommandHandler : Notifiable, ICommandHandler<RegisterCustomerCommand>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IEmailService _emailService;
@@ -42,7 +42,7 @@ namespace ModernStoreAPI.Domain.Commands.Handlers
             if (_customerRepository.DocumentExists(command.Document))
             {
                 AddNotification("Customer", "Customer already exists.");
-                return null; 
+                return null;
             }
 
             var name = new Name(command.FirstName, command.LastName);
@@ -58,8 +58,11 @@ namespace ModernStoreAPI.Domain.Commands.Handlers
             AddNotifications(customer.Notifications);
 
 
-            if (Valid)
-                _customerRepository.Save(customer);
+            if (Invalid)
+                return null;
+
+            _customerRepository.Save(customer);
+
             _emailService.Send(
                 customer.Name.ToString(),
                 customer.Email.Address,
