@@ -7,6 +7,10 @@ namespace ModernStoreAPI.Domain.Entities
 {
     public class Customer : Entity
     {
+        protected Customer()
+        {
+
+        }
         public Customer(Name name, Document document, Email email, User user)
         {
             Name = name;

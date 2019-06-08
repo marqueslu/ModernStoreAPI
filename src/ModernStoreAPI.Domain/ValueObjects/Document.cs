@@ -8,12 +8,16 @@ namespace ModernStoreAPI.Domain.ValueObjects
 {
     public class Document : Notifiable
     {
+        protected Document()
+        {
+
+        }
         public Document(string number)
         {
             Number = number;
 
-            if (!Validate(number))
-                AddNotification("Document", "Invalid document");
+            //if (!Validate(number))
+            //    AddNotification("Document", "Invalid document");
         }
 
         public string Number { get; private set; }
