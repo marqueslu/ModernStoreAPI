@@ -8,12 +8,11 @@ namespace ModernStoreAPI.Domain.Repositories
     {
         Customer Get(Guid id);
         GetCustomerCommandResult Get(string username);
+        Customer GetByUsername(string username);
         //Customer Get(string document);
         Customer GetByUserId(Guid id);       
         void Save(Customer customer);
         void Update(Customer customer);
         bool DocumentExists(string document);
-
-
     }
 }

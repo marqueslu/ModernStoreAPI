@@ -23,6 +23,15 @@ namespace ModernStoreAPI.Domain.Entities
         public string Password { get; private set; }
         public bool Active { get; private set; }
 
+        public bool Authenticate(string username, string password)
+        {
+            if (Username == username && Password == EncryptPassword(password))
+                return true;
+
+            AddNotification("User", "Invalid user or password");
+            return false;
+        }
+
         public void Activate() => Active = true;
 
         public void Deactivate() => Active = false;

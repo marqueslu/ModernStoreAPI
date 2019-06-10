@@ -19,7 +19,7 @@ namespace ModernStoreAPI.Api.Controllers
         }
 
         [HttpPost]
-        [Route("v1/customers")]
+        [Route("v1/orders")]
         public async Task<IActionResult> Post([FromBody]RegisterOrderCommand command)
         {
 
