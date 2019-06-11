@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using System.Linq;
+using ModernStoreAPI.Shared;
+
 namespace ModernStoreAPI.Infra.Repositories
 {
     public class ProductRepository : IProductRepository
@@ -27,7 +29,7 @@ namespace ModernStoreAPI.Infra.Repositories
         public IEnumerable<GetProductListCommandResult> Get()
         {
             var query = "SELECT [ID], [TITLE], [IMAGE], [PRICE] FROM Product";
-            using (var con = new SqlConnection(@"server=localhost,1433;Database=ModerStore;User ID=SA;Password=123Aa321"))
+            using (var con = new SqlConnection(Runtime.ConnectionString))
             {
                 con.Open();
                 return con.Query<GetProductListCommandResult>(query);

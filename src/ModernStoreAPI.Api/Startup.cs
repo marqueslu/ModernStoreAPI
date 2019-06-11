@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ModernStoreAPI.Api.Security;
@@ -15,16 +16,29 @@ using ModernStoreAPI.Infra.Contexts;
 using ModernStoreAPI.Infra.Repositories;
 using ModernStoreAPI.Infra.Services;
 using ModernStoreAPI.Infra.Transactions;
+using ModernStoreAPI.Shared;
 
 namespace ModernStoreAPI.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; set; }
+
         private const string ISSUER = "c1f521f42";
         private const string AUDIENCE = "c6bdasfb645024";
         private const string SECRET_KEY = "c1f51f42-5727-4d15-b787-c6bbbb645024";
 
         private readonly SymmetricSecurityKey _sigingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SECRET_KEY));
+
+        public Startup(IHostingEnvironment env)
+        {
+            var configurationBuilder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            Configuration = configurationBuilder.Build();
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -67,7 +81,7 @@ namespace ModernStoreAPI.Api
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
-            {                
+            {
                 options.TokenValidationParameters = tokenValidationParameters;
             });
 
@@ -113,6 +127,8 @@ namespace ModernStoreAPI.Api
                x.AllowAnyOrigin();
            });
             app.UseMvc();
+
+            Runtime.ConnectionString = Configuration.GetConnectionString("CnnStr");
         }
     }
 }

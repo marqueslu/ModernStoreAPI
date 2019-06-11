@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ModernStoreAPI.Domain.Entities;
 using ModernStoreAPI.Domain.ValueObjects;
 using ModernStoreAPI.Infra.Mappings;
+using ModernStoreAPI.Shared;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +19,7 @@ namespace ModernStoreAPI.Infra.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"server=localhost,1433;Database=ModerStore;User ID=SA;Password=123Aa321");
+            optionsBuilder.UseSqlServer(Runtime.ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
