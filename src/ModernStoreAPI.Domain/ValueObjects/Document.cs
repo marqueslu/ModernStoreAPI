@@ -16,8 +16,8 @@ namespace ModernStoreAPI.Domain.ValueObjects
         {
             Number = number;
 
-            //if (!Validate(number))
-            //    AddNotification("Document", "Invalid document");
+            if (!Validate(number))
+                AddNotification("Document", "Invalid document");
         }
 
         public string Number { get; private set; }

@@ -18,6 +18,10 @@ namespace ModernStoreAPI.Domain.Entities
             Document = document;
             Email = email;
             User = user;
+
+            AddNotifications(name.Notifications);
+            AddNotifications(email.Notifications);
+            AddNotifications(Document.Notifications);
         }
 
         public Name Name { get; private set; }

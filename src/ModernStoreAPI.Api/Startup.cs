@@ -17,6 +17,7 @@ using ModernStoreAPI.Infra.Repositories;
 using ModernStoreAPI.Infra.Services;
 using ModernStoreAPI.Infra.Transactions;
 using ModernStoreAPI.Shared;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ModernStoreAPI.Api
 {
@@ -101,6 +102,11 @@ namespace ModernStoreAPI.Api
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<CustomerCommandHandler, CustomerCommandHandler>();
             services.AddTransient<OrderCommandHandler, OrderCommandHandler>();
+
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new Info { Title = "ModerStore", Version = "v1" });
+            });
         }
 
 
@@ -127,6 +133,11 @@ namespace ModernStoreAPI.Api
                x.AllowAnyOrigin();
            });
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ModernStore V1");
+            });
 
             Runtime.ConnectionString = Configuration.GetConnectionString("CnnStr");
         }

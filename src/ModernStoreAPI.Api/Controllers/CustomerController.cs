@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModernStoreAPI.Domain.Commands.Handlers;
 using ModernStoreAPI.Domain.Commands.Inputs;
@@ -21,6 +22,7 @@ namespace ModernStoreAPI.Api.Controllers
 
         [HttpPost]
         [Route("v1/customers")]
+        [AllowAnonymous]
         public async Task<IActionResult> Post([FromBody]RegisterCustomerCommand command)
         {
 
