@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModernStoreAPI.Domain.Repositories;
 
@@ -16,6 +17,7 @@ namespace ModernStoreAPI.Api.Controllers
         }
         [HttpGet]
         [Route("v1/products")]
+        [AllowAnonymous]
         public IActionResult Get()
         {
             return Ok(_productRepository.Get());

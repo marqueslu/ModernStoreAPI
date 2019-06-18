@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModernStoreAPI.Domain.Commands.Handlers;
 using ModernStoreAPI.Domain.Commands.Inputs;
@@ -20,9 +21,10 @@ namespace ModernStoreAPI.Api.Controllers
 
         [HttpPost]
         [Route("v1/orders")]
+        [AllowAnonymous]
         public async Task<IActionResult> Post([FromBody]RegisterOrderCommand command)
         {
-
+            var customer = User.Identity.Name;
             var result = _handler.Handle(command);
             return await Response(result, _handler.Notifications);
 
